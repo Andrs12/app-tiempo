@@ -1,0 +1,11 @@
+<div class="login">
+    <h1 class="login-title">Login</h1>
+
+    <div action="get" class="login-card">
+        <div class="login-item ">Usuario <input class="form-control" type="text" [(ngModel)]="clientData.user" name="{{clientData.user}}" placeholder="Juan"></div>
+        <div class="login-item">Contraseña <input class="form-control" type="password" [(ngModel)]="clientData.password" name="{{clientData.password}}" placeholder="1234"></div>
+        <div class="btn btn-primary login-buton" (click)="login()">Iniciar sesion</div>
+        <div class="login-error" *ngIf="loginError">Incorrect Data</div>
+
+    </div>
+</div>

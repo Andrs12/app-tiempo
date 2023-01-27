@@ -1,0 +1,79 @@
+<div class="first-row">
+  <!-- BUSCADOR START-->
+  <div class="finder-col">
+    <h2>Check the time in your city</h2>
+    <input
+      class="form-control"
+      (ngModelChange)="search($event)"
+      type="text"
+      [(ngModel)]="searchInput"
+      name="{{ searchInput }}"
+      placeholder="Madrid"
+    />
+    <div class="cities-list">
+      <div class="city" *ngFor="let citySearch of citesSearch">
+        <div class="city-name">{{ citySearch.name }}</div>
+        <div>
+          <i
+            class="icon bi bi-thermometer"
+            (click)="getCityTime(citySearch.id)"
+          ></i>
+          <i
+            class="icon bi bi-star-fill"
+            (click)="addCityToFavorite(citySearch)"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- BUSCADOR END-->
+
+  <!-- FAVORITOS START-->
+  <div class="fav-cities-col">
+    <div class="favorites-cities">
+      <h1>Your favorite cities</h1>
+      <div class="fav-cities-list">
+        <div
+          class="favorite-city city"
+          *ngFor="let cityFavorite of favoriteCities"
+        >
+          {{ cityFavorite.name }}
+          <div class="icons">
+            <div (click)="getCityTime(cityFavorite.id)">
+              <i class="icon bi bi-thermometer"></i>
+            </div>
+            <div (click)="deleteCityFavorite(cityFavorite)">
+              <i class="icon bi bi-trash"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FAVORITOS END-->
+    </div>
+
+    <!-- TIEMPO START-->
+    <div *ngIf="showTime" class="time">
+      <div class="time-data">
+        <h1>{{ degrees }}º in {{ timeData.name }}</h1>
+        <img src="{{ timeIconURL }}" alt="" />
+      </div>
+      <google-map
+        height="80%"
+        width="100%"
+        [zoom]="zoom"
+        [center]="center"
+        [options]="options"
+      >
+        <map-marker
+          [position]="marker.position"
+          [label]="marker.label"
+          [title]="marker.title"
+          [options]="marker.options"
+        >
+        </map-marker>
+      </google-map>
+    </div>
+    <!-- TIEMPO END-->
+  </div>
+</div>
+
